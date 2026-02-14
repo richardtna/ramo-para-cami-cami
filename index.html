@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Para ti cami cami 🤍</title>
+
+  <style>
+    :root{
+      --petal:#ffd24a;
+      --petal2:#ffb900;
+      --center:#3a2a1a;
+      --center2:#1b120c;
+
+      --stem:#2f7b3c;
+      --stem2:#46c96a;
+      --leaf:#3f9a4b;
+
+      --glow: rgba(255, 219, 92, .22);
+      --soft: rgba(255,220,110,.18);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%; margin:0;}
+    body{
+      overflow:hidden;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(1200px 700px at 50% 35%, rgba(255,210,80,.10), transparent 60%),
+        radial-gradient(900px 600px at 50% 70%, rgba(120,200,255,.08), transparent 55%),
+        radial-gradient(1200px 900px at 50% 50%, #0b1020 0%, #050812 55%, #02040b 100%);
+      color:#f6f7ff;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    /* Estrellas */
+    .stars{ position:fixed; inset:0; pointer-events:none; overflow:hidden; }
+    .star{
+      position:absolute; width:2px; height:2px;
+      background:rgba(255,255,255,.9);
+      border-radius:50%;
+      box-shadow: 0 0 10px rgba(255,255,255,.35);
+      opacity:.8;
+      animation: twinkle 3.2s infinite ease-in-out;
+    }
+    @keyframes twinkle{
+      0%,100%{ transform:scale(.9); opacity:.35 }
+      50%{ transform:scale(1.6); opacity:1 }
+    }
+
+    .wrap{
+      position:relative;
+      width:min(720px, 92vw);
+      height:min(720px, 92vh);
+      display:grid;
+      place-items:center;
+    }
+
+    .title{
+      position:absolute;
+      top:6%;
+      width:100%;
+      text-align:center;
+      font-size: clamp(22px, 3.3vw, 40px);
+      letter-spacing:.5px;
+      font-weight: 650;
+      text-shadow: 0 2px 18px rgba(0,0,0,.55);
+      opacity:.95;
+      animation: float 4.5s ease-in-out infinite;
+    }
+    @keyframes float{
+      0%,100%{ transform: translateY(0px); }
+      50%{ transform: translateY(-8px); }
+    }
+
+    .bouquet{
+      position:absolute;
+      inset: 18% 6% 6% 6%;
+      display:grid;
+      place-items:center;
+      filter: drop-shadow(0 28px 40px rgba(0,0,0,.55));
+    }
+
+    .bouquetGlow{
+      position:absolute;
+      width:min(520px, 78vw);
+      height:min(520px, 78vw);
+      border-radius:50%;
+      background: radial-gradient(circle at 50% 48%, var(--soft), transparent 62%);
+      filter: blur(18px);
+      opacity:.9;
+    }
+
+    .flowers{
+      position:relative;
+      width:min(520px, 78vw);
+      height:min(520px, 78vw);
+    }
+
+    /* “nacimiento” común de tallos */
+    .origin{
+      position:absolute;
+      left:50%;
+      bottom:90px;
+      width:22px; height:22px;
+      transform: translateX(-50%);
+      border-radius:50%;
+      background: radial-gradient(circle, rgba(70,200,110,.55), rgba(20,60,35,.0) 70%);
+      filter: blur(.2px);
+      opacity:.9;
+    }
+
+    .base{
+      position:absolute;
+      left:50%;
+      bottom:52px;
+      width:260px; height:130px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 45%, rgba(90,200,120,.28), transparent 60%),
+        radial-gradient(circle at 70% 55%, rgba(60,160,95,.26), transparent 62%),
+        radial-gradient(circle at 50% 55%, rgba(20,70,40,.70), rgba(10,25,18,.0) 72%);
+      opacity:.9;
+    }
+
+    /* Flor */
+    .flower{
+      position:absolute;
+      left:50%;
+      bottom:92px;
+      transform-origin: 50% 100%;
+      filter: drop-shadow(0 0 18px var(--glow));
+    }
+
+    /* tallo desde el mismo punto (abierto en abanico) */
+    .stem{
+      position:absolute;
+      left:50%;
+      bottom:0;
+      width:10px;
+      height:270px;
+      transform: translateX(-50%);
+      border-radius: 10px;
+      background: linear-gradient(var(--stem2), var(--stem));
+      box-shadow: 0 0 0 1px rgba(0,0,0,.08);
+    }
+
+    /* hojas pegadas al tallo */
+    .leaf{
+      position:absolute;
+      width:45px; height:25px;
+      background: linear-gradient(135deg, #2fd36c, var(--leaf));
+      border-radius: 60% 0 60% 0;
+      opacity:.95;
+      filter: saturate(1.05);
+    }
+    .f1 .leaf.left{ left:50%; bottom:120px; transform: translateX(-45px) rotate(40deg); }
+    .f1 .leaf.right{ left:50%; bottom:120px; transform: translateX(0px) rotate(-40deg) scaleX(-1); }
+
+    .f2 .leaf.left{ left:50%; bottom:160px; transform: translateX(-45px) rotate(40deg); }
+    .f2 .leaf.right{ left:50%; bottom:160px; transform: translateX(0px) rotate(-40deg) scaleX(-1); }
+
+
+    .f3 .leaf.left{ left:50%; bottom:200px; transform: translateX(-45px) rotate(40deg); }
+    .f3 .leaf.right{ left:50%; bottom:200px; transform: translateX(0px) rotate(-40deg) scaleX(-1); }
+
+
+    .f4 .leaf.left{ left:50%; bottom:160px; transform: translateX(-45px) rotate(40deg); }
+    .f4 .leaf.right{ left:50%; bottom:160px; transform: translateX(0px) rotate(-40deg) scaleX(-1); }
+
+    .f5 .leaf.left{ left:50%; bottom:120px; transform: translateX(-45px) rotate(40deg); }
+    .f5 .leaf.right{ left:50%; bottom:120px; transform: translateX(0px) rotate(-40deg) scaleX(-1); }
+
+
+
+    /* cabeza (solo esto se mueve) */
+    .head{
+      position:absolute;
+      left:50%;
+      bottom:240px;
+      width: 102px; height:102px;
+      transform: translateX(-50%);
+      transform-origin: 50% 85%;
+      animation: headSway 3.9s ease-in-out infinite;
+    }
+    @keyframes headSway{
+      0%,100%{ transform: translateX(-50%) rotate(-4deg); }
+      50%{ transform: translateX(-50%) rotate(4.8deg); }
+    }
+
+    .sunflower{ position:absolute; inset:0; }
+
+   .petal{
+  position:absolute;
+  left:50%; top:27%;
+  width: 22px; height: 44px;            /* MÁS chico */
+  transform-origin: 50% 92%;            /* base del pétalo */
+
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,.22), transparent 45%),
+    linear-gradient(180deg, #ffd85a 0%, #f7b300 70%, #e39a00 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,.08),
+    0 6px 14px rgba(0,0,0,.18);
+
+  /* “pétalo” más natural */
+  clip-path: polygon(
+    50% 0%,
+    68% 10%,
+    82% 26%,
+    88% 44%,
+    84% 64%,
+    70% 82%,
+    50% 100%,
+    30% 82%,
+    16% 64%,
+    12% 44%,
+    18% 26%,
+    32% 10%
+  );
+}
+.petal.back{
+  width: 28px; height: 54px;
+  transform-origin: 50% 100%;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,.14), transparent 45%),
+    linear-gradient(180deg, #ffcf3a 0%, #f0a800 80%, #d99300 100%);
+  opacity:.95;
+}
+    .center{
+      position:absolute;
+      left:50%; top:50%;
+      width: 54px; height:54px;
+      transform: translate(-50%,-50%);
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.10), transparent 45%),
+        radial-gradient(circle, #4b3725 0%, var(--center) 55%, var(--center2) 100%);
+      box-shadow:
+        inset 0 0 0 2px rgba(0,0,0,.18),
+        0 10px 18px rgba(0,0,0,.35);
+    }
+    .center::after{
+      content:"";
+      position:absolute; inset:7px;
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(0,0,0,.22), transparent 42%),
+        radial-gradient(circle at 70% 60%, rgba(0,0,0,.22), transparent 45%),
+        radial-gradient(circle, rgba(255,210,130,.10) 0 2px, transparent 2px 7px);
+      opacity:.65;
+      mix-blend-mode: overlay;
+    }
+
+    /* Abanico: todos nacen desde el mismo punto y se abren */
+    .f1{ transform: translateX(-50%) rotate(-35deg); }
+    .f2{ transform: translateX(-50%) rotate(-15deg); }
+    .f3{ transform: translateX(-50%) rotate(0deg); }
+    .f4{ transform: translateX(-50%) rotate(15deg); }
+    .f5{ transform: translateX(-50%) rotate(35deg); }
+
+    /* alturas distintas para que se vea natural */
+    .f1 .stem{ height:255px; }
+    .f2 .stem{ height:275px; }
+    .f3 .stem{ height:295px; }
+    .f4 .stem{ height:275px; }
+    .f5 .stem{ height:255px; }
+
+    .f1 .head{ bottom:225px; width:92px; height:92px; animation-delay:-.4s; }
+    .f2 .head{ bottom:240px; width:100px; height:100px; animation-delay:-1.2s; }
+    .f3 .head{ bottom:258px; width:112px; height:112px; animation-delay:-.8s; animation-duration:4.6s; }
+    .f4 .head{ bottom:240px; width:100px; height:100px; animation-delay:-1.5s; }
+    .f5 .head{ bottom:225px; width:92px; height:92px; animation-delay:-.2s; animation-duration:3.7s; }
+  </style>
+</head>
+
+<body>
+  <div class="stars" id="stars"></div>
+
+  <div class="wrap">
+    <div class="title">para ti cami cami 🤍</div>
+
+    <div class="bouquet">
+      <div class="bouquetGlow"></div>
+
+      <div class="flowers">
+        <div class="base"></div>
+        <div class="origin"></div>
+
+        <div class="flower f1">
+          <div class="head"><div class="sunflower" id="sf1"></div></div>
+          <div class="stem"></div>
+          <div class="leaf left"></div><div class="leaf right"></div>
+        </div>
+
+        <div class="flower f2">
+          <div class="head"><div class="sunflower" id="sf2"></div></div>
+          <div class="stem"></div>
+          <div class="leaf left"></div><div class="leaf right"></div>
+        </div>
+
+        <div class="flower f3">
+          <div class="head"><div class="sunflower" id="sf3"></div></div>
+          <div class="stem"></div>
+          <div class="leaf left"></div><div class="leaf right"></div>
+        </div>
+
+        <div class="flower f4">
+          <div class="head"><div class="sunflower" id="sf4"></div></div>
+          <div class="stem"></div>
+          <div class="leaf left"></div><div class="leaf right"></div>
+        </div>
+
+        <div class="flower f5">
+          <div class="head"><div class="sunflower" id="sf5"></div></div>
+          <div class="stem"></div>
+          <div class="leaf left"></div><div class="leaf right"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // estrellas
+    const stars = document.getElementById("stars");
+    for (let i = 0; i < 120; i++) {
+      const s = document.createElement("div");
+      s.className = "star";
+      s.style.left = (Math.random() * 100) + "vw";
+      s.style.top = (Math.random() * 100) + "vh";
+      const size = Math.random() < 0.15 ? 3 : 2;
+      s.style.width = size + "px";
+      s.style.height = size + "px";
+      s.style.animationDelay = "-" + (Math.random() * 3.5).toFixed(2) + "s";
+      s.style.animationDuration = (2.2 + Math.random() * 3.6).toFixed(2) + "s";
+      s.style.opacity = (0.35 + Math.random() * 0.65).toFixed(2);
+      stars.appendChild(s);
+    }
+
+    function buildSunflower(el, petals = 16) {
+      for (let i = 0; i < petals; i++) {
+        const p = document.createElement("div");
+        p.className = "petal back";
+        const angle = (360 / petals) * i;
+        p.style.transform = `translate(-50%,-50%) rotate(${angle}deg) translateY(-30px)`;
+        el.appendChild(p);
+      }
+      for (let i = 0; i < petals; i++) {
+        const p = document.createElement("div");
+        p.className = "petal";
+        const angle = (360 / petals) * i + (180 / petals);
+        p.style.transform = `translate(-50%,-50%) rotate(${angle}deg) translateY(-30px)`;
+        el.appendChild(p);
+      }
+      const c = document.createElement("div");
+      c.className = "center";
+      el.appendChild(c);
+    }
+
+    ["sf1","sf2","sf3","sf4","sf5"].forEach(id => buildSunflower(document.getElementById(id), 16));
+  </script>
+</body>
+</html>
